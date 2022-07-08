@@ -44,4 +44,4 @@ spec:
 
               port: 
 
-                number: {{ .Values.api.port }
+                number: {{ .Values.api.port }}
