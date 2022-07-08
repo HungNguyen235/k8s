@@ -4,7 +4,7 @@ api:
 
   repCount: 1 
 
-  image: thangsu/student-app-api:0.0.1-SNAPSHOT 
+  image: hungnguyen23/student-app-api:0.0.1-SNAPSHOT 
 
   port: 8080 
 
@@ -18,7 +18,7 @@ client:
 
   repCount: 1 
 
-  image: thangsu/student-app-client 
+  image: hungnguyen23/student-app-client 
 
   port: 80 
 
