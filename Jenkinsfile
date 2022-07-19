@@ -31,11 +31,6 @@ node {
         }
     }
     
-    stage("Deploy Application and mongo"){
-        dir("k8s"){
-            sh "helm upgrade demo . --install"
-        }
-    }
     stage("install istio"){
         dir("istio"){
             stage("Install and Deploy istio using helm"){
@@ -45,14 +40,22 @@ node {
                 sh 'helm upgrade istiod istio/istiod -n istio-system --wait --install'
                 sh 'kubectl label namespace default istio-injection=enabled --overwrite'
                 sh 'helm upgrade istio-ingress istio/gateway -f hungvip.yaml --wait --install'
+                
             }
         }
     }
+    
+    stage("Deploy Application and mongo"){
+        dir("k8s"){
+            sh 'helm upgrade demo . --install'
+        }
+    }
+    
 
     stage("Deploy prometeus and grafana"){
         dir("istio"){
-            sh 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
             sh 'kubectl apply -f gateway.yaml'
+            sh 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
             sh 'helm show values prometheus-community/kube-prometheus-stack > prometheus.yaml'
             sh 'helm upgrade my-kube-prometheus-stack prometheus-community/kube-prometheus-stack --values prometheus.yaml -n monitoring --create-namespace --install'
         }
