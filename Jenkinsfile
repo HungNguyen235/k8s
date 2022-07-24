@@ -35,10 +35,10 @@ node {
         dir("istio"){
             stage("Install and Deploy istio using helm"){
                 sh 'helm repo add istio https://istio-release.storage.googleapis.com/charts'
-                sh 'kubectl create namespace istio-system'
+//                 sh 'kubectl create namespace istio-system'
                 sh 'helm upgrade istio-base istio/base -n istio-system --install'
                 sh 'helm upgrade istiod istio/istiod -n istio-system --wait --install'
-                sh 'kubectl label namespace default istio-injection=enabled --overwrite'
+//                 sh 'kubectl label namespace default istio-injection=enabled --overwrite'
                 sh 'helm upgrade istio-ingress istio/gateway -f hungvip.yaml --wait --install'
                 
             }
