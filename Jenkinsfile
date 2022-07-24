@@ -8,7 +8,7 @@ node {
     dir("react-student-management-web-app"){
         stage("Docker build"){
             sh 'docker build -t hungnguyen23/student-app-client .'
-            sh 'docker tag hungnguyen23/student-app-client hungnguyen23/student-app-client:1.0.6'
+            sh 'docker tag hungnguyen23/student-app-client hungnguyen23/student-app-client:1.0.8'
         }
     }
     
@@ -25,7 +25,7 @@ node {
     }
 
     stage("Push Image to Docker Hub"){
-        sh 'docker push  hungnguyen23/student-app-client:1.0.6'
+        sh 'docker push  hungnguyen23/student-app-client:1.0.8'
         dir("spring-boot-student-app-api"){
             sh 'mvn dockerfile:push'
         }
