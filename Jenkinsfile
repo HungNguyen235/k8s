@@ -8,7 +8,7 @@ node {
     dir("react-student-management-web-app"){
         stage("Docker build"){
             sh 'docker build -t hungnguyen23/student-app-client .'
-            sh 'docker tag hungnguyen23/student-app-client hungnguyen23/student-app-client:1.0.8'
+            sh 'docker tag hungnguyen23/student-app-client hungnguyen23/student-app-client:1.0.9'
         }
     }
     
@@ -25,7 +25,7 @@ node {
     }
 
     stage("Push Image to Docker Hub"){
-        sh 'docker push  hungnguyen23/student-app-client:1.0.8'
+        sh 'docker push  hungnguyen23/student-app-client:1.0.9'
         dir("spring-boot-student-app-api"){
             sh 'mvn dockerfile:push'
         }
@@ -35,10 +35,10 @@ node {
         dir("istio"){
             stage("Install and Deploy istio using helm"){
                 sh 'helm repo add istio https://istio-release.storage.googleapis.com/charts'
-//                 sh 'kubectl create namespace istio-system'
+                sh 'kubectl create namespace istio-system'
                 sh 'helm upgrade istio-base istio/base -n istio-system --install'
                 sh 'helm upgrade istiod istio/istiod -n istio-system --wait --install'
-//                 sh 'kubectl label namespace default istio-injection=enabled --overwrite'
+                sh 'kubectl label namespace default istio-injection=enabled --overwrite'
                 sh 'helm upgrade istio-ingress istio/gateway -f hungvip.yaml --wait --install'
                 
             }
