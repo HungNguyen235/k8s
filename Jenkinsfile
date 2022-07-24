@@ -1,9 +1,9 @@
 node {
 
-    stage("Git Clone"){
+//     stage("Git Clone"){
 
-        git credentialsId: 'github', url: 'https://github.com/HungNguyen235/k8s.git'
-    }
+//         git credentialsId: 'github', url: 'https://github.com/HungNguyen235/k8s.git'
+//     }
     
     dir("react-student-management-web-app"){
         stage("Docker build"){
