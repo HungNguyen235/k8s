@@ -7,7 +7,7 @@ api:
 client:
   name: student-app-client
   repCount: 1
-  image: hungnguyen23/student-app-client:1.0.12
+  image: hungnguyen23/student-app-client:1.0.13
   port: 80
   targetPort: 80
 volume:
