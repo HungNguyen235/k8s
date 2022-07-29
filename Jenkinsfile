@@ -33,7 +33,7 @@ node {
     
     stage("install istio"){
         dir("istio"){
-            stage("Install and Deploy istio using helm"){
+            stage("Install using helm"){
                 sh 'helm repo add istio https://istio-release.storage.googleapis.com/charts'
                 sh 'kubectl create namespace istio-system'
                 sh 'helm upgrade istio-base istio/base -n istio-system --install'
@@ -52,7 +52,7 @@ node {
     }
     
 
-    stage("Deploy prometeus and grafana"){
+    stage("install prometeus and grafana"){
         dir("istio"){
             sh 'kubectl apply -f gateway.yaml'
             sh 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
